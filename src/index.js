@@ -1,25 +1,32 @@
 import React from "react";
 import { render } from "react-dom";
 
-const ce = React.createElement;
+//making jsx
+//double{{}} expression -> js object  <-
 
-//passing props
-var myTitle = function(props) {
-  return ce(
-    "div",
-    null,
-    ce("h1", { style: { color: props.color } }, props.title)
+var MyTitle = function(props) {
+  const styleColor = { color: props.color };
+  return (
+    <div>
+      <h1 style={{ color: props.color }}>
+        {props.title}
+      </h1>
+    </div>
+  );
+};
+//TODO: Create MyDescription component using props.color, props.size and props.description
+// use that component after each MyTitle to add some descriptive details
+
+//composit component
+var SecondSuperSweet = function() {
+  return (
+    <div>
+      <MyTitle title="Monster Town" color="burlywood" />
+      <MyTitle title="Pizza Bagels" color="greenyellow" />
+      <MyTitle title="Docker Pants" color="peru" />
+      <MyTitle title=".NET Yeah ok" color="yellowgreen" />
+    </div>
   );
 };
 
-var secondSuperSweet = function() {
-  return ce(
-    "div",
-    null,
-    ce(myTitle, { title: "Monster Town", color: "red" }),
-    ce(myTitle, { title: "Pizza Bagels", color: "peru" }),
-    ce(myTitle, { title: "Docker Pants", color: "greenyellow" })
-  );
-};
-
-render(ce(secondSuperSweet), document.getElementById("app"));
+render(<SecondSuperSweet />, document.getElementById("app"));
