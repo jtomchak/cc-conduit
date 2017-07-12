@@ -1,20 +1,25 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { render } from "react-dom";
 
-let ce = React.createElement;
+const ce = React.createElement;
 
-var myTitle = function() {
-  return ce("div", null, ce("h1", null, "This is pretty freakin' sweet"));
+//passing props
+var myTitle = function(props) {
+  return ce(
+    "div",
+    null,
+    ce("h1", { style: { color: props.color } }, props.title)
+  );
 };
 
 var secondSuperSweet = function() {
   return ce(
     "div",
     null,
-    ce(myTitle, null),
-    ce(myTitle, null),
-    ce(myTitle, null)
+    ce(myTitle, { title: "Monster Town", color: "red" }),
+    ce(myTitle, { title: "Pizza Bagels", color: "peru" }),
+    ce(myTitle, { title: "Docker Pants", color: "greenyellow" })
   );
 };
 
-ReactDOM.render(ce(secondSuperSweet), document.getElementById("app"));
+render(ce(secondSuperSweet), document.getElementById("app"));
