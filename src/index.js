@@ -16,6 +16,7 @@ var MyTitle = function(props) {
 };
 //TODO: Create MyDescription component using props.color, props.size and props.description
 // use that component after each MyTitle to add some descriptive details
+//let's modify it from h1's to a unordered list with list items
 
 //composit component
 var SecondSuperSweet = function() {
