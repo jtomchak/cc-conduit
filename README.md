@@ -1,5 +1,8 @@
 
-##Changing to class component
+## Challenge
+[![Edit Create Component](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/oN68z4ZY?fontsize=16)
+
+## Changing to class component
 * notice the inline style and the declared style object
 * constructor adding local state
 * but now how do we change or update it ?
@@ -66,7 +69,7 @@ render(<Counter />, document.getElementById("app"));
 
 ```
 
-##class methods
+## class methods
 ```javascript
 onIncrement = () => {
     this.setState((prevState, props) => {
@@ -116,7 +119,7 @@ export default JtButton;
 ```
 
 
-##Routing
+## Routing
 * let's create a router
 * bc we all love routing
 * move our stuff around a bit for clarity
