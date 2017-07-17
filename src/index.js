@@ -1,51 +1,20 @@
 import React from "react";
 import { render } from "react-dom";
-import JtButton from "./JtButton";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
-class Counter extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentCount: 0
-    };
-  }
+import Counter from "./Counter";
+import Home from "./Home";
 
-  onIncrement = () => {
-    this.setState((prevState, props) => {
-      return { currentCount: prevState.currentCount + 1 };
-    });
-  };
-
-  onDecrement = () => {
-    this.setState((prevState, props) => {
-      return { currentCount: prevState.currentCount - 1 };
-    });
-  };
-
-  onReset = () => {
-    this.setState((prevState, props) => {
-      return { currentCount: 0 };
-    });
-  };
-
-  render() {
-    return (
+const Root = () => {
+  return (
+    <Router>
       <div>
-        <h1 style={counterStyle}>
-          {this.state.currentCount}
-        </h1>
-        <div style={{ textAlign: "center" }}>
-          <JtButton title="+" onClick={this.onIncrement} />
-          <JtButton title="Reset" onClick={this.onReset} />
-          <JtButton title="-" onClick={this.onDecrement} />
-        </div>
+        <Route exact path="/" component={Home} />
+        <Route path="/firstCounter" component={Counter} />
+        <Route path="/secondCounter" component={Counter} />
       </div>
-    );
-  }
-}
-const counterStyle = {
-  fontSize: 32,
-  textAlign: "center"
+    </Router>
+  );
 };
 
-render(<Counter />, document.getElementById("app"));
+render(<Root />, document.getElementById("app"));
