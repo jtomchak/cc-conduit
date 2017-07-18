@@ -1,14 +1,14 @@
 import React from "react";
 
-const JtButton = props => {
+const CounterButton = props => {
   return (
-    <button style={buttonStyle} onClick={props.onClick}>
+    <button style={style} onClick={props.passedAction}>
       {props.title}
     </button>
   );
 };
 
-const buttonStyle = {
+const style = {
   backgroundColor: "#4CAF50" /* Green */,
   borderWidth: 0,
   color: "white",
@@ -16,7 +16,7 @@ const buttonStyle = {
   paddingBottom: 16,
   paddingRight: 32,
   paddingLeft: 32,
-  fontSize: 16
+  fontSize: 28
 };
 
-export default JtButton;
+export default CounterButton;

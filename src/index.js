@@ -1,18 +1,24 @@
 import React from "react";
 import { render } from "react-dom";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Counter from "./Counter";
-import Home from "./Home";
+import Store from "./store";
+import Counter from "./components/Counter";
+import Home from "./components/Home";
+
+const FourOhFour = () => <h1>404</h1>;
 
 const Root = () => {
   return (
     <Router>
-      <div>
-        <Route exact path="/" component={Home} />
-        <Route path="/firstCounter" component={Counter} />
-        <Route path="/secondCounter" component={Counter} />
-      </div>
+      <Provider store={Store}>
+        <div>
+          <Route exact path="/" component={Home} />
+          <Route path="/countera" component={Counter} />
+          <Route path="/counterb" component={Counter} />
+        </div>
+      </Provider>
     </Router>
   );
 };

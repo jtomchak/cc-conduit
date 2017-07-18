@@ -167,6 +167,117 @@ this.title = props.match.path;
 * able to pass data via props
 * Functional and Class compenents
 * React has a powerful composition model, and we recommend using composition instead of inheritance to reuse code between components.
-* 
+
+## Redux 3 Principles (state management)
+* It's not scary, but that doesn't mean it's easy.
+1. The whole state of your app as a **SINGLE** Javascript Object **STATE**
+  * Minimal representation of the data in your app. 
+2. The State tree is redundant or immutable. Change must be done through an **ACTION** 
+  * Minimal representation of the change in your app. 
+  * action object, required to have a type property that is a string, bc it can be serialized. 
+  * apps will have different types of apps, todo's addCounter, removeCounter
+  * scales to med / large apps
+  * components unaware of how it happens, just **DISPATCHES** an action. 
+  * just a plain object that describe, what changed in the application. 
+3. State mutations function take prevState and action being dispatched and return a new State object, this is called the **REDUCER**
+  * shallow clone, makes it fast
+  * **MUST** be a pure function (ask me about pure functions!)
+
+ ## Adding Redux
+ 1. Gonna need to init a store
+ 2. If you haven't already stuff your components into a folder, and create a reducers folder. 
+ 3. Update router with switch and add 404 page. 
+ 4. **A** reducer needs to handle init state, with will get called with no state or 'undefined' when redux initalizes it. **B** handle actions it doesn't know, default to switch. 
+ ```javascript
+ const DEFAULT_STATE = {
+  counter: 0
+};
+
+const rootReducer = (state = DEFAULT_STATE, action) => {
+  switch (action.type) {
+    default:
+      return state;
+  }
+};
+
+export default rootReducer;
+```
+5. Actions will be like
+```javascript
+{
+  type: String,
+  payload: <any>,
+}
+```
+6. Create store.js 
+* this is where middleware will go
+```javascript
+import { createStore } from 'redux';
+import reducer from './reducers';
+
+const store = createStore(reducer);
+
+export default store;
+```
+
+7. Add reducer for rootReducer
+```javascript
+import { INCREMENT_COUNTER } from "./actions";
+
+const DEFAULT_STATE = {
+  counter: 0
+};
+
+// new reducer above rootReducer
+const incrementCounter = (state, action) => {
+  return Object.assign({}, state, { counter: state.counter + 1 });
+};
+
+const rootReducer = (state = DEFAULT_STATE, action) => {
+  switch (action.type) {
+    case 'INCREMENT_COUNTER':
+      return incrementCounter(state, action);
+    default:
+      return state;
+  }
+};
+
+export default rootReducer;
+```
+
+8. Wire up in app entry point with provider
+* <Provider store={Store}>
+* import { Provider } from "react-redux" 
+
+9. Now, yes now, we can 'dispatch our action'
+* -> that will call our reducer
+* -> that will catch on reducer switch
+* -> that will take state and defined action
+* -> that will then return new state
+
+10. Counter
+* import connect
+* mapStateToProps
+```javascript
+const mapStateToProps = state => ({
+  counter: state.counter
+});
+
+export default connect(mapStateToProps)(Counter)
+```
+* Connect is a function that allows your component to tap into the Redux store's state. The mapStateToProps allows you to select which pieces of state are passed into your component which helps keep thing clean. At the bottom we export a connected version of the component. Now if you reload the page the input doesn't work for the same reason it didn't with React previously: we are never sending the typed text to Redux to update its state. Let's do that now.
+
+* Dear god are we there yet ?? close
+* Wiring up the last bit
+```javascript
+// at top
+import { incrementCounter } from './actionCreators'
+// at the bottom
+const mapDispatchToProps = (dispatch: Function) => ({
+  handleOnIncrement() {
+    dispatch(incrementCounter());
+  }
+});
+```
 
 

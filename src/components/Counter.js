@@ -1,10 +1,15 @@
 import React from "react";
 import { render } from "react-dom";
 import { Link } from "react-router-dom";
-import JtButton from "./JtButton";
+import { connect } from "react-redux";
+
+import { incrementCounter } from "../actionCreators";
+import CounterButton from "./CounterButton";
 
 class Counter extends React.Component {
   constructor(props) {
+    console.log(props);
+
     super(props);
     this.title = props.match.path;
     this.state = {
@@ -42,16 +47,21 @@ class Counter extends React.Component {
           {this.fancyTitle()}
         </h1>
         <h2 style={counterStyle}>
-          {this.state.currentCount}
+          {this.props.counter}
         </h2>
         <div style={{ textAlign: "center" }}>
-          <JtButton title="+" onClick={this.onIncrement} />
-          <JtButton title="Reset" onClick={this.onReset} />
-          <JtButton title="-" onClick={this.onDecrement} />
+          <CounterButton
+            title="+"
+            passedAction={this.props.handleOnIncrement}
+          />
+          <CounterButton title="Reset" passedAction={this.onReset} />
+          <CounterButton title="-" passedAction={this.onDecrement} />
         </div>
-        <Link to="/firstCounter">Number 1</Link>
+        <Link to="/">Home</Link>
         <br />
-        <Link to="/secondCounter">Number Dos</Link>
+        <Link to="/countera">Counter A</Link>
+        <br />
+        <Link to="/counterb">Counter B</Link>
       </div>
     );
   }
@@ -61,4 +71,13 @@ const counterStyle = {
   textAlign: "center"
 };
 
-export default Counter;
+const mapStateToProps = state => ({
+  counter: state.counter
+});
+const mapDispatchToProps = dispatch => ({
+  handleOnIncrement() {
+    dispatch(incrementCounter());
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);
