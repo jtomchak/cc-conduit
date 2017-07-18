@@ -10,10 +10,10 @@ const Home = () => {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/firstCounter">Number 1</Link>
+          <Link to="/counterA">Counter A</Link>
         </li>
         <li>
-          <Link to="/secondCounter">Number Dos</Link>
+          <Link to="/counterB">Counter B</Link>
         </li>
       </ul>
     </div>

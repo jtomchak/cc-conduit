@@ -1,18 +1,22 @@
 import React from "react";
 import { render } from "react-dom";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Provider } from "react-redux";
 
-import Counter from "./Counter";
-import Home from "./Home";
+import Counter from "./components/Counter";
+import Home from "./components/Home";
+import store from "./store";
 
 const Root = () => {
   return (
     <Router>
-      <div>
-        <Route exact path="/" component={Home} />
-        <Route path="/firstCounter" component={Counter} />
-        <Route path="/secondCounter" component={Counter} />
-      </div>
+      <Provider store={store}>
+        <div>
+          <Route exact path="/" component={Home} />
+          <Route path="/counterA" component={Counter} />
+          <Route path="/counterB" component={Counter} />
+        </div>
+      </Provider>
     </Router>
   );
 };

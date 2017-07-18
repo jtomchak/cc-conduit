@@ -1,6 +1,6 @@
 import React from "react";
 
-const JtButton = props => {
+const CounterButton = props => {
   return (
     <button style={buttonStyle} onClick={props.onClick}>
       {props.title}
@@ -19,4 +19,4 @@ const buttonStyle = {
   fontSize: 16
 };
 
-export default JtButton;
+export default CounterButton;
