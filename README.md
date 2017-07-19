@@ -1,12 +1,21 @@
 
-##Changing to class component
+## Challenge
+[![Edit Create Component](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/oN68z4ZY?fontsize=16)
+
+## Changing to class component
 * notice the inline style and the declared style object
 * constructor adding local state
 * but now how do we change or update it ?
 * good question
 * react dev tools chrome
 * redux dev tools
-* 
+
+You can convert a functional component to a class in five steps:
+1. Create an ES6 class with the same name that extends React.Component.
+2. Add a single empty method to it called render().
+3. Move the body of the function into the render() method.
+4. Replace props with this.props in the render() body.
+5. Delete the remaining empty function declaration. 
 ```javascript
 import React from "react";
 import { render } from "react-dom";
@@ -60,7 +69,7 @@ render(<Counter />, document.getElementById("app"));
 
 ```
 
-##class methods
+## class methods
 ```javascript
 onIncrement = () => {
     this.setState((prevState, props) => {
@@ -110,7 +119,7 @@ export default JtButton;
 ```
 
 
-##Routing
+## Routing
 * let's create a router
 * bc we all love routing
 * move our stuff around a bit for clarity

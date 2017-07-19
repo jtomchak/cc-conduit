@@ -1,15 +1,24 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { render } from "react-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Provider } from "react-redux";
 
-var MyFirstComponent = function() {
-  return React.createElement(
-    "div",
-    null,
-    React.createElement("h1", null, "This is my first component!")
+import Counter from "./components/Counter";
+import Home from "./components/Home";
+import store from "./store";
+
+const Root = () => {
+  return (
+    <Router>
+      <Provider store={store}>
+        <div>
+          <Route exact path="/" component={Home} />
+          <Route path="/counterA" component={Counter} />
+          <Route path="/counterB" component={Counter} />
+        </div>
+      </Provider>
+    </Router>
   );
 };
 
-ReactDOM.render(
-  React.createElement(MyFirstComponent),
-  document.getElementById("app")
-);
+render(<Root />, document.getElementById("app"));
